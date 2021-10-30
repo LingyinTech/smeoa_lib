@@ -1,0 +1,304 @@
+<layout name='Layout/ace_layout'/>
+{:W('PageHeader',array('name'=>'添加订单','search'=>'N'))}
+<div class="operate panel panel-default">
+    <div class="panel-body">
+        <div class="pull-right">
+            <a onclick="add()" class="btn btn-sm btn-primary">新增</a>
+        </div>
+    </div>
+</div>
+
+<div class="container company-oms">
+
+    <form id="form_data" name="form_data" method="post" class="well">
+        <input type="hidden" name="op_mode" id="op_mode" value="add">
+
+        <div class="row first-row">
+            <div class="col-md-1"><img style="height: 47px;" src="{:get_logo_url()}"></div>
+            <div class="col-md-1">接单人:</div>
+            <div class="col-md-1 form-data">
+                <input type="hidden" name="sales" value="{$userName}">
+                <select name="user_id">
+                    {:fill_option($userList,$userId)}
+                </select>
+            </div>
+            <div class="col-md-1">生产编号：</div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1 form-data">
+                <select name="customer_type">
+                    <option value="">客户类型</option>
+                    {:fill_option($customerTypeList)}
+                </select>
+            </div>
+            <div class="col-md-1">订单类型</div>
+            <div class="col-md-1 form-data">
+                <select name="order_type">
+                    {:fill_option($orderTypeList)}
+                </select>
+            </div>
+            <div class="col-md-2 form-data">
+                <input name="content" class="content" type="text" placeholder="备注（加定前订单编号及其他）">
+            </div>
+            <div class="col-md-1 last-col"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1">店铺名称</div>
+            <div class="col-md-1 form-data">
+                <select name="shop_id" id="shop_id" check="require" msg="请选择店铺">
+                    <option value="">请选择店铺</option>
+                    {:fill_option($shopList)}
+                </select>
+            </div>
+            <div class="col-md-1">客户信息</div>
+            <div class="col-md-2 form-data">
+                <input type="text" name="cust_name" check="require" msg="请填写客户信息" placeholder="（淘宝ID）">
+            </div>
+            <div class="col-md-2 form-data">
+                <input type="text" name="order_sn" placeholder="（订单编号）">
+            </div>
+            <div class="col-md-2 form-data">
+                <input type="text" name="impression" placeholder="（订单印象）">
+            </div>
+            <div class="col-md-1">下单时间</div>
+            <div class="col-md-1 form-data">
+                <input data-date-format="yyyy-mm-dd" type="text" id="order_time" name="order_time" value="{:date('Y-m-d')}"
+                       readonly="readonly" class="input-date form-control" check="require" msg="下单时间不能为空">
+            </div>
+            <div class="col-md-1 last-col"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1">订单金额</div>
+            <div class="col-md-1 form-data">
+                <input type="text" name="total_price" class="total_price">
+            </div>
+            <div class="col-md-1">尾款</div>
+            <div class="col-md-1 form-data">
+                <input type="text" name="rest_price" class="rest_price">
+            </div>
+            <div class="col-md-1">返差</div>
+            <div class="col-md-1 form-data">
+                <input type="text" name="diff_price" class="diff_price">
+            </div>
+            <div class="col-md-2 form-data">
+                <input type="text" name="diff_note" placeholder="（特别备注）">
+            </div>
+            <div class="col-md-1">付款方式</div>
+            <div class="col-md-1 form-data">
+                <select name="pay_type">
+                    {:fill_option($payTypeList)}
+                </select>
+            </div>
+            <div class="col-md-1 form-data payment_voucher">
+                <span class="fa fa-search display-none"></span>
+                <span class="fa fa-upload" id="payment_voucher"></span>
+                <span class="fa fa-minus"></span>
+                <input type="hidden" name="payment_voucher" value="">
+                <span class="tips display-none">付款凭证</span>
+                <div class="display-none" id="payment_voucher_container"></div>
+            </div>
+            <div class="col-md-1 last-col"></div>
+        </div>
+
+        <div class="row <if condition='empty($checkPlanOrder)'>disabled</if>">
+            <div class="col-md-1">底衫选择</div>
+            <div class="col-md-1 form-data">
+                <select name="shirt_type">
+                    <option value="">请选择</option>
+                    {:fill_option($shirtTypeList)}
+                </select>
+            </div>
+
+            <div class="col-md-1">调货商及单号</div>
+            <div class="col-md-2 form-data">
+                <input type="text" name="shirt_note">
+            </div>
+
+            <div class="col-md-1">工艺选择</div>
+            <div class="col-md-1 form-data">
+                <select name="craft_type">
+                    <option value="0">请选择</option>
+                    {:fill_option($craftTypeList)}
+                </select>
+            </div>
+            <div class="col-md-1">底衫价格</div>
+            <div class="col-md-1 form-data">
+                <if condition="!empty($checkPlanOrder)">
+                    <input type="text" name="shirt_price" class="shirt_price">
+                </if>
+            </div>
+            <div class="col-md-1">产品毛利</div>
+            <div class="col-md-1 form-data">
+                <if condition="!empty($checkPlanOrder)">
+                    <input type="text" name="gross_profit" readonly> %
+                </if>
+            </div>
+            <div class="col-md-1 last-col"></div>
+        </div>
+
+        <if condition="!empty($useProduct)">
+        <div class="row style" data-product-index="0">
+            <div class="col-md-1">
+                款式
+            </div>
+            <div class="col-md-1 form-data">
+                <select name="style[0]" check="require" msg="请选择款式">
+                    <option value="">请选择</option>
+                    {:fill_option($styleList)}
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row three-row">
+                    <div class="col-md-4 hard">颜色</div>
+                    <div class="col-md-4 form-data-size hard"><input type="text" name="color[0]" check="require" msg="请填写颜色"></div>
+                    <div class="col-md-4">尺码</div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="col-md-6 line1 hard"></div>
+                    <div class="col-md-6 line1">XS</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 line2 hard">男</div>
+                    <div class="col-md-6 form-data-size line2">
+                        <input type="number" name="mxs[0]">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 hard">女</div>
+                    <div class="col-md-6 form-data-size">
+                        <input type="number" name="fxs[0]">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="col-md-6 line1 hard">S</div>
+                    <div class="col-md-6 line1">M</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size line2 hard"><input type="number" name="ms[0]"></div>
+                    <div class="col-md-6 form-data-size line2"><input type="number" name="mm[0]"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size hard"><input type="number" name="fs[0]"></div>
+                    <div class="col-md-6 form-data-size"><input type="number" name="fm[0]"></div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="col-md-6 line1 hard">L</div>
+                    <div class="col-md-6 line1">XL</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size line2 hard"><input type="number" name="ml[0]"></div>
+                    <div class="col-md-6 form-data-size line2"><input type="number" name="mxl[0]"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size hard"><input type="number" name="fl[0]"></div>
+                    <div class="col-md-6 form-data-size"><input type="number" name="fxl[0]"></div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="col-md-6 line1 hard">2XL</div>
+                    <div class="col-md-6 line1">3XL</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size line2 hard"><input type="number" name="mxxl[0]"></div>
+                    <div class="col-md-6 form-data-size line2"><input type="number" name="mxxxl[0]"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size hard"><input type="number" name="fxxl[0]"></div>
+                    <div class="col-md-6 form-data-size"><input type="number" name="fxxxl[0]"></div>
+                </div>
+            </div>
+
+            <div class="col-md-1">
+                <div class="row">
+                    <div class="col-md-6 line1 hard">4XL</div>
+                    <div class="col-md-6 line1">小计</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size line2 hard"><input type="number" name="mxxxxl[0]"></div>
+                    <div class="col-md-6 form-data-size line2"><input type="text" readonly="readonly" name="mtotal[0]"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-data-size hard"><input type="number" name="fxxxxl[0]"></div>
+                    <div class="col-md-6 form-data-size"><input type="text" readonly="readonly" name="ftotal[0]"></div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-3 line1 hard">总计</div>
+                    <div class="col-md-9 line1">备注</div>
+                </div>
+                <div class="row two-row">
+                    <div class="col-md-3 form-data-size hard">
+                        <input type="text" readonly="readonly" name="total_count[0]">
+                    </div>
+                    <div class="col-md-9 form-data-size">
+                        <textarea name="style_note[0]"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-1 last-col">
+                <span class="fa fa-plus"></span>
+                <span class="fa fa-minus"></span>
+            </div>
+        </div>
+
+        </if>
+        <div class="row note">
+            <div class="col-md-1 title">产品备注及调货信息</div>
+            <div class="col-md-10 form-data">
+                <textarea name="product_note" required msg="请填写产品信息备注"></textarea>
+            </div>
+            <div class="col-md-1 last-col"></div>
+        </div>
+
+        <div class="row note">
+            <div class="col-md-1 title">发货信息</div>
+            <div class="col-md-10 form-data">
+                <textarea name="note" required msg="请填写产品及发货信息备注"></textarea>
+            </div>
+            <div class="col-md-1 last-col"></div>
+        </div>
+
+        <div class="row file">
+            <div class="col-md-1">
+                <div id="uploadprev">
+                    <a id="prevfiles" href="javascript:;" class="btn btn-sm btn-primary">添加效果图</a>
+                    <input type="hidden" name="prev_files" value="">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="uploadprev">
+                    <ul id="prev_list" new_upload="" >
+                    </ul>
+                </div>
+
+                <div class="uploader">
+                    <ul id="file_list" new_upload="" >
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div id="uploader">
+                    <a id="pickfiles" href="javascript:;" class="btn btn-sm btn-primary">打版图上传</a>
+                    <input type="hidden" name="file_sid" value="">
+                </div>
+
+            </div>
+            <div class="col-md-1 last-col"></div>
+        </div>
+    </form>
+</div>

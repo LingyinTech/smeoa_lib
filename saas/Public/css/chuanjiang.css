@@ -1,0 +1,145 @@
+.company-oms.container {
+    float: left;
+    width: 1300px;
+    text-align: left;
+}
+
+.company-oms .panel-heading {
+    min-width: 1200px;
+}
+
+.company-oms .well {
+    min-width: 1300px;
+}
+
+.company-oms .well .row [class*="col-md-"] {
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    border: #1a1a1a solid 1px;
+}
+
+.company-oms .well .row [class*="col-md-"].last-col {
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+.company-oms .well .row [class*="col-md-"].form-data {
+    padding: 0 5px;
+}
+
+.company-oms .well .row [class*="col-md-"].form-data-size {
+    padding: 0;
+}
+
+
+.company-oms .well .row input,.company-oms .well .row select,.company-oms .well .row textarea {
+    height: 90%;
+    width: 100%;
+}
+
+.company-oms .well .row input[name=gross_profit] {
+    width: 80%;
+}
+
+.company-oms .well .row input[name=content]::-webkit-input-placeholder {
+    color: #FF0000;
+}
+.company-oms .well .row input[name=content]::-moz-input-placeholder {
+    color: #FF0000;
+}
+.company-oms .well .row input[name=content]::-ms-input-placeholder {
+    color: #FF0000;
+}
+
+.company-oms .well .row.first-row [class*="col-md-"] {
+    height: 55px;
+    line-height: 55px;
+}
+
+.company-oms .well .row.note [class*="col-md-"] {
+    height: 70px;
+}
+
+.company-oms .well .row.note.invoice_note [class*="col-md-"] {
+    height: 100px;
+}
+
+.company-oms .well .row.note [class*="col-md-"] textarea {
+    margin-top: 5px;
+}
+
+.company-oms .well .row.file [class*="col-md-"]{
+    min-height: 200px;
+}
+
+.company-oms .well .row.preview [class*="col-md-"] {
+    height: auto;
+}
+
+.company-oms .well .row.preview [class*="col-md-"] img {
+    max-width: 700px;
+    margin: 5px 0;
+}
+
+.company-oms .well .row.flow-content [class*="col-md-"] {
+    height: auto;
+    min-height: 15px;
+    line-height: 15px;
+}
+
+.company-oms .well .row.note div.title {
+    line-height: 35px;
+}
+
+.company-oms .well .row.style [class*="col-md-"]{
+    height: 90px;
+    line-height: 90px;
+}
+
+.company-oms .well .row.style [class*="col-md-"] .row [class*="col-md-"]{
+    height: 30px;
+    line-height: 30px;
+    border: none;
+}
+
+.company-oms .well .row.style [class*="col-md-"] .row .line1[class*="col-md-"]{
+    border-bottom: #1a1a1a solid 1px;
+}
+
+.company-oms .well .row.style [class*="col-md-"] .row .line2[class*="col-md-"]{
+    border-bottom: #1a1a1a solid 1px;
+}
+
+.company-oms .well .row.style [class*="col-md-"] .row .hard[class*="col-md-"]{
+    border-right: #1a1a1a solid 1px;
+}
+
+.company-oms .well .row.style [class*="col-md-"] .two-row [class*="col-md-"]{
+    height: 60px;
+    line-height: 60px;
+}
+
+.company-oms .well .row.style [class*="col-md-"] .three-row [class*="col-md-"]{
+    height: 90px;
+    line-height: 90px;
+}
+
+.company-oms .well .row.style:last-child .fa {
+    display: none;
+}
+
+.company-oms .daily-charts {
+    min-width: 1080px;
+    min-height: 700px;
+}
+
+.ul_table.order {
+    min-width: 1300px;
+}
+
+.ul_table.order .list-inline {
+    display: inline;
+    white-space: nowrap;
+}

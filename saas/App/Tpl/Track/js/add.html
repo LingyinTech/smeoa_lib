@@ -1,0 +1,14 @@
+<script type="text/javascript">
+	function add() {
+		$("#op_mode").val("add");
+		if (check_form("form_data")) {
+
+			sendForm("form_data", "{:U('save')}", "{:U('track/add')}");
+		}
+	}
+
+
+	$(document).ready(function() {
+
+	}); 
+</script>

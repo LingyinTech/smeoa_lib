@@ -1,0 +1,51 @@
+<layout name='Layout/ace_layout'/>
+
+<link rel="stylesheet" href="{:get_static_url()}/qZone/app-35.css"/>
+<link rel="stylesheet" href="{:get_static_url()}/qZone/photo.css"/>
+
+<div class="operate panel panel-default">
+    <div class="panel-body">
+        <div class="pull-left">
+            <a onclick="addFile('{$type}')" class="btn btn-sm btn-primary">上传图片</a>
+
+            <a onclick="addAlbum('{$type}')" class="btn btn-sm btn-primary">添加相册</a>
+
+            <a class="btn btn-sm btn-primary batchMgr">批量管理</a>
+
+            <a class="btn btn-sm btn-primary none all" data-checked="0"> 全选</a>
+
+            <a class="btn btn-sm btn-primary none batchDelete" > 删除</a>
+
+            <a class="btn btn-sm btn-primary none return" > 退出</a>
+
+        </div>
+    </div>
+</div>
+
+<div class="ul_table">
+    <notempty name="list">
+        <ul class="js-album-list-ul">
+            <foreach name="list" item="vo">
+                <li style="float: left;width: 300px;height: 300px;">
+                    <div class="bg bor3 mod-album js-album-item js-album-transition" data-id="216297891">
+                        <div class="album-bd js-album-item-imgBox">
+                            <a href="{:U('picture',['album_id'=>$vo['id']])}" class="album-cover js-album-cover">
+                                <if condition="$topImage[$vo['id']]['save_name']">
+                                    <img class="layer" src="{$imageCache}{$topImage[$vo['id']]['save_name']}?x-oss-process=image/resize,w_300,h_300" data-original="{$imageCache}{$topImage[$vo['id']]['save_name']}" layer-src="{$imageCache}{$topImage[$vo['id']]['save_name']}">
+                                </if>
+                            </a>
+                            <input type="checkbox" class="mod-photo-op none" value="{$vo.id}">
+                        </div>
+                        <div class="album-ft">
+                            <div class="album-desc  album-has-limit">
+                                <a href="{:U('picture',['album_id'=>$vo['id']])}" class="c-tx2 js-album-desc-a"
+                                   title="{$vo.name}">{$vo.name}</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </foreach>
+        </ul>
+    </notempty>
+</div>
+

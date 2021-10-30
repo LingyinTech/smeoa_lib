@@ -1,0 +1,48 @@
+<layout name='Layout/ace_layout' />
+{:W('PageHeader',array('name'=>'分派订单','search'=>'N'))}
+<div class="ul_table message-container" style="min-width: 1080px;">
+	<ul>
+		<li class="thead">
+			<div class="pull-left">
+				<span class="col-8 text-center border-right">订单编号</span>
+				<span class="col-14 text-center border-right">客户名称（班长）</span>				
+				<span class="col-14 text-center border-right">选定款式</span>
+				<span class="col-10 text-center border-right">客户电话</span>
+				<span class="col-10 text-center border-right">客户QQ</span>
+				<span class="col-14 text-center border-right">下单时间</span>
+				<span class="col-14 text-center border-right">操作</span>
+			</div>
+		</li>
+		<empty name="list">
+			<li class="no-data">
+				暂无订单
+			</li>
+			<else/>
+			<form method="post" action="" name="form_data" id="form_data">
+				<input type="hidden" name="select" id="selected">
+				<foreach name="list" item="vo">
+					<li class="tbody" id="{$vo.orderid}">
+						<div class="pull-left">
+							<span class="col-8 text-center border-right">{$vo.orderid}</span>
+							<span class="col-14 text-center border-right">{$vo.cust_name}</span>
+							<span class="col-14 text-center border-right">{$vo.style}</span>
+							<span class="col-10 text-center border-right">{$vo.tel}</span>
+							<span class="col-10 text-center border-right">{$vo.qq}</span>
+							<span class="col-14 text-center border-right">{$vo.addtime|date="Y-m-d H:i:s",###
+}</span>
+							<span class="col-14 text-center border-right">
+								<div class="btn-group">
+									<a onclick="select_designer({$vo.orderid})" class="btn btn-sm btn-primary">派人</a>
+									<a onclick="" id="" class="btn btn-sm btn-primary">详情</a>
+								</div>
+							</span>
+						</div>
+					</li>
+				</foreach>
+			</form>
+			<div class="pagination">
+				{$page}
+			</div>
+		</empty>
+	</ul>
+</div>

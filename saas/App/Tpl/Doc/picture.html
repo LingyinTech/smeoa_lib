@@ -1,0 +1,47 @@
+<layout name='Layout/ace_layout'/>
+
+<link rel="stylesheet" href="{:get_static_url()}/qZone/app-35.css"/>
+<link rel="stylesheet" href="{:get_static_url()}/qZone/photo.css"/>
+
+<div class="operate panel panel-default">
+    <div class="panel-body">
+        <div class="pull-left">
+
+            <a onclick="addFile('{$albumInfo.type}','{$albumInfo.id}')" class="btn btn-sm btn-primary">上传图片</a>
+
+            <a class="btn btn-sm btn-primary batchMgr">批量管理</a>
+
+            <a class="btn btn-sm btn-primary none all" data-checked="0"> 全选</a>
+
+            <a href="{:U('batchDown')}" target="_blank" class="btn btn-sm btn-primary none batchDown" > 批量下载</a>
+
+            <a class="btn btn-sm btn-primary none batchDelete" > 删除</a>
+
+            <a class="btn btn-sm btn-primary none return" > 退出</a>
+        </div>
+    </div>
+</div>
+
+<div class="ul_table">
+    <notempty name="list">
+        <ul>
+            <foreach name="list" item="vo">
+                <li style="float: left;width: 300px;height: 300px;">
+                    <div class="bg bor3 mod-album js-album-item js-album-transition" data-id="216297891">
+                        <div class="album-bd js-album-item-imgBox">
+                            <a href="javascript:;" class="album-cover js-album-cover">
+                                <img class="layer" src="{$imageCache}{$vo.save_name}?x-oss-process=image/resize,w_300,h_300" data-original="{$imageCache}{$vo.save_name}" layer-src="{$imageCache}{$vo.save_name}" />
+                            </a>
+                            <input type="checkbox" class="mod-photo-op none" value="{$vo.id}">
+                        </div>
+                    </div>
+                </li>
+            </foreach>
+        </ul>
+
+        <div class="pagination clearFix" style="margin-top: 20px;">
+            {$page}
+        </div>
+    </notempty>
+</div>
+

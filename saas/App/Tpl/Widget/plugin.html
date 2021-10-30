@@ -1,0 +1,70 @@
+<notempty name="widget.jquery-ui">
+	<script src="{:get_static_url()}/js/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="{:get_static_url()}/js/jquery.ui.touch-punch.min.js"></script>
+</notempty>
+
+<notempty name="widget.date">
+	<script src="{:get_static_url()}/js/date-time/bootstrap-datepicker.js"></script>
+	<script src="{:get_static_url()}/js/date-time/locales/bootstrap-datepicker.zh-CN.js"></script>
+</notempty>
+
+<notempty name="widget.city-picker">
+	<script src="{:get_static_url()}/city-picker/city-picker.data.js"></script>
+	<script src="{:get_static_url()}/city-picker/city-picker.js"></script>
+</notempty>
+
+<notempty name="widget.editor">
+	<script type="text/javascript" src="{:get_static_url()}/editor/kindeditor.js"></script>
+	<script type="text/javascript" src="{:get_static_url()}/editor/lang/zh_CN.js"></script>
+	<script type="text/javascript" src="{:get_static_url()}/editor/kindeditor.setting.js"></script>
+</notempty>
+
+<notempty name="widget.layer">
+	<script type="text/javascript" src="{:get_static_url()}/layer-3.1.1/dist/layer.js"></script>
+</notempty>
+
+<notempty name="widget.lazyload">
+	<script type="text/javascript" src="{:get_static_url()}/lazyload/jquery.lazyload.min.js"></script>
+</notempty>
+
+<notempty name="widget.uploader">
+	<script type="text/javascript" src="{:get_static_url()}/plupload/plupload.full.min.js"></script>
+	<script type="text/javascript" src="{:get_static_url()}/plupload/plupload.setting.js"></script>
+</notempty>
+
+<notempty name="widget.album">
+	<script type="text/javascript" src="{:get_static_url()}/plupload/plupload.full.min.js"></script>
+	<script type="text/javascript" src="{:get_static_url()}/plupload/album.setting.js"></script>
+</notempty>
+
+<notempty name="widget.echarts">
+	<script type="text/javascript" src="{:get_static_url()}/echarts-5.2.1/dist/echarts.min.js"></script>
+</notempty>
+
+<script src="{:get_static_url()}/js/jquery.gritter.min.js"></script>
+<script src="{:get_static_url()}/js/bootbox.min.js"></script>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			<notempty name="widget.date">
+				$('.input-date').datepicker({
+					language:"zh-CN",
+					autoclose : true
+				});
+				$(".input-daterange").datepicker({
+					 format: "yyyy-mm-dd",
+					 language:"zh-CN",
+					 autoclose: true,
+				});
+			</notempty>
+
+			<notempty name="widget.editor">
+				editor_init();
+			</notempty>
+
+			<notempty name="widget.lazyload">
+					$("img.layer").lazyload();
+			</notempty>
+
+	});
+</script>

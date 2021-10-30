@@ -1,0 +1,75 @@
+<script type="text/javascript">
+    function order_info(id) {
+        var url = "{:U('order/order_info')}" + '?id=' + id;
+        layer.open({
+            type: 2,
+            content: url,
+            area: ['1300px', '96%'],
+            maxmin: true,
+            title : '订单'
+        });
+    }
+
+    function urgent(id) {
+        var url = "{:U('cust/note')}" + '?operator=urgent&id=' + id;
+        winopen(url, 700, 300);
+    }
+
+    function ship24(id) {
+        var url = "{:U('cust/note')}" + '?operator=24ship&id=' + id;
+        winopen(url, 700, 300);
+    }
+
+    function refund(id) {
+        var url = "{:U('cust/note')}" + '?operator=refund&id=' + id;
+        winopen(url, 700, 300);
+    }
+
+    function afterSale(id) {
+        var url = "{:U('cust/note')}" + '?operator=after_sale&id=' + id;
+        winopen(url, 700, 300);
+    }
+
+    function redo(id) {
+        var url = "{:U('cust/note')}" + '?operator=redo&id=' + id;
+        winopen(url, 700, 300);
+    }
+
+    function cust_confirm(id) {
+        var url = "{:U('cust/confirm')}" + '?id=' + id;
+        winopen(url, 700, 330);
+    }
+
+    function other(id) {
+        var url = "{:U('cust/note')}" + '?operator=other&id=' + id;
+        winopen(url, 700, 300);
+    }
+
+    function readyStock(id) {
+        var url = "{:U('cust/ready_stock')}" + '?id=' + id;
+        winopen(url, 700, 330);
+    }
+
+    function readFile(id) {
+        var url = "{:U('design/read_file')}" + '?id=' + id;
+        winopen(url, 730, 600);
+    }
+
+    function order_print(id,type){
+        var url = "{:U('produce/order_print')}"+'?id='+id+'&type='+type;
+        layer.open({
+            type: 2,
+            content: url,
+            area: ['850px', '600px'],
+            maxmin: true,
+            title : '打印'
+        });
+    }
+
+    function delivery(id, partner_id) {
+        var url = "{:U('produce/delivery')}" + '?id=' + id + '&partner_id=' + partner_id;
+        winopen(url, 700, 500);
+    }
+
+</script>
+

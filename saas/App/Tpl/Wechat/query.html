@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="{:get_static_url()}/dfsg/main.css" media="all">
+		<link rel="stylesheet" type="text/css" href="{:get_static_url()}/dfsg/mobiscroll_min.css" media="all">
+		<script type="text/javascript" src="{:get_static_url()}/dfsg/zepto_min.js"></script>
+		<script type="text/javascript" src="{:get_static_url()}/dfsg/mobiscroll_min.js"></script>
+		<script type="text/javascript" src="{:get_static_url()}/dfsg/alert.js"></script>
+		<script type="text/javascript" src="{:get_static_url()}/dfsg/swipe.js"></script>
+		<script type="text/javascript" src="{:get_static_url()}/dfsg/initSwipe.js"></script>
+		<script type="text/javascript" src="{:get_static_url()}/dfsg/index.js"></script>
+		<script type="text/javascript" src="{:get_static_url()}/js/common.js"></script>
+		<script type="text/javascript" src="{:get_static_url()}/js/html2canvas-0.5.js"></script>
+		<title>{:get_system_config("SYSTEM_NAME")}</title>
+
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<!-- Mobile Devices Support @begin -->
+
+		<meta content="telephone=no, address=no" name="format-detection">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<!-- apple devices fullscreen -->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<!-- Mobile Devices Support @end -->
+
+	</head>
+	<body onselectstart="return true;" ondragstart="return false;">
+		<div class="container gray_bg">
+			<div class="explain">
+				<h3>查询说明</h3>
+				<article>
+					请输入您的手机号，查询订单状态
+				</article>
+			</div>
+			<div class="box apply_box" id="applyBox">
+				<dl class="pb15">
+					<dt>
+						联系电话<span class="r_tips">*</span>
+					</dt>
+					<dd>
+						<input name="tel" class="single txt required" id="tel" placeholder="请输入您的手机号码" value="" type="text" style="-webkit-appearance: none;width: 100%;height: 40px;border: 1px solid #dadbda;border-radius: 2px;background-color: #f6f6f6;padding: 0 10px;">
+					</dd>
+				</dl>
+			</div>
+
+			<a id="download"><img id="orderimg" src="" style="display:none;" /></a>
+			<footer class="sub_wrap">
+				<!--<input id="showcard" class="btn mt20" value="" type="button">-->
+				<input type="submit" class="btn mt20" id="query" value="查询">
+				<div class="copyright">
+					©{:get_system_config("SYSTEM_NAME")}
+				</div>
+			</footer>
+		</div>
+		<script>
+			$(document).ready(function() {
+				$("#query").on("click", function(event) {
+					tel = $('#tel').val();
+					var parameter = "tel=" + tel;
+					url = "{:U('query')}";
+					$.ajax({
+						type : "POST",
+						url : url,
+						data : parameter,
+						success : function(rs) {
+							$("#orderinfo").html(rs);
+							event.preventDefault();
+							html2canvas(document.getElementById("orderinfo"), {
+								allowTaint : true,
+								taintTest : false,
+								onrendered : function(canvas) {
+									canvas.id = "mycanvas";
+									//document.body.appendChild(canvas);
+									//生成base64图片数据
+									var dataUrl = canvas.toDataURL("image/jpeg");
+									document.getElementById("orderimg").src = dataUrl;
+									document.getElementById("orderimg").style.display = 'block';
+									$("#download").attr("href", dataUrl).attr("download", "img.jpg");
+									$("#orderinfo").html(' ');
+								}
+							});
+						}
+					});
+
+				});
+
+			});
+		</script>
+	</body>
+	<div id="orderinfo" style="width: 730px"></div>
+</html>

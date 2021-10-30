@@ -1,0 +1,29 @@
+<script type="text/javascript">
+
+    function invoiceInfo(id) {
+        var url = "{:U('invoice/order_info')}" + '?id=' + id;
+        layer.open({
+            type: 2,
+            content: url,
+            area: ['1250px', '96%'],
+            maxmin: true,
+            title : '发票'
+        });
+    }
+
+    function addFile(id){
+        var url = "{:U('invoice/add_file')}"+'?id='+id;
+        winopen(url, 700, 500);
+    }
+
+    function deliveryInvoice(id){
+        var url = "{:U('invoice/delivery')}"+'?id='+id;
+        winopen(url, 700, 500);
+    }
+	
+	function export_all(){
+		var url = "{:U('export_all')}";
+		winopen(url, 700, 550);
+	}
+
+</script>

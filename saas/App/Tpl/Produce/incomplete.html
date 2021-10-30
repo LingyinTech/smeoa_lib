@@ -1,0 +1,22 @@
+<layout name='Layout/ace_popup' />
+
+<div class="operate panel panel-default">
+	<div class="panel-body">
+		<div class="pull-left">
+			<a  onclick="save();" class="btn btn-sm btn-primary">确定</a>
+		</div>
+		<div class="pull-right">
+			<a  onclick="myclose();" class="btn btn-sm btn-primary">关闭</a>
+		</div>
+	</div>
+	<form method='post' id="form_data" name="form_data" enctype="multipart/form-data"  class="well form-horizontal">
+		<div class="form-group col-sm-6">
+		<label class="col-sm-4 control-label" for="name">提示说明*：</label>
+		<div class="col-sm-8">
+			<input name="userid" id="userid" value="{$order.userid}" type="hidden" />
+			<input type="hidden" id="ajax" name="ajax" value="1">
+			<input name="reason" id="reason" value="您负责的<{$order.unit}>的订单信息不完整：" class="form-control" />
+		</div>
+	</div>
+	</form>
+</div>

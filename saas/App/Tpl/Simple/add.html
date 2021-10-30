@@ -1,0 +1,127 @@
+<layout name='Layout/ace_layout'/>
+{:W('PageHeader',array('name'=>'添加看样订单','search'=>'N'))}
+<div class="operate panel panel-default">
+ <div class="panel-body">
+  <div class="pull-right">
+   <a onclick="add()" class="btn btn-sm btn-primary">新增</a>
+  </div>
+ </div>
+</div>
+
+<div class="container company-oms">
+
+ <form id="form_data" name="form_data" method="post" class="well">
+  <input type="hidden" name="op_mode" id="op_mode" value="add">
+
+  <div class="row first-row">
+   <div class="col-md-1"><img style="height: 47px;" src="{:get_logo_url()}"></div>
+   <div class="col-md-1">接单人:</div>
+   <div class="col-md-1 form-data">
+    <input type="hidden" name="sales" value="{$userName}">
+    <select name="user_id">
+     {:fill_option($userList,$userId)}
+    </select>
+   </div>
+   <div class="col-md-1">看样编号：</div>
+   <div class="col-md-2"></div>
+
+   <div class="col-md-1">订单金额</div>
+   <div class="col-md-1 form-data">
+    <input type="text" name="total_price" class="total_price">
+   </div>
+
+   <div class="col-md-1">付款方式</div>
+   <div class="col-md-1 form-data">
+    <select name="pay_type">
+     {:fill_option($payTypeList)}
+    </select>
+   </div>
+   <div class="col-md-1 form-data payment_voucher">
+    <span class="fa fa-search display-none"></span>
+    <span class="fa fa-upload" id="payment_voucher"></span>
+    <span class="fa fa-minus"></span>
+    <input type="hidden" name="payment_voucher" value="">
+    <span class="tips display-none">付款凭证</span>
+    <div class="display-none" id="payment_voucher_container"></div>
+   </div>
+
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row">
+   <div class="col-md-1">店铺名称</div>
+   <div class="col-md-1 form-data">
+    <select name="shop_id" id="shop_id" check="require" msg="请选择店铺">
+     <option value="">请选择店铺</option>
+     {:fill_option($shopList)}
+    </select>
+   </div>
+   <div class="col-md-1">客户信息</div>
+   <div class="col-md-2 form-data">
+    <input type="text" name="cust_name" required msg="请填写客户信息" placeholder="（淘宝ID）">
+   </div>
+   <div class="col-md-3 form-data">
+    <input type="text" name="order_sn" placeholder="（订单编号）">
+   </div>
+   <div class="col-md-1">下单时间</div>
+   <div class="col-md-2">
+    <input data-date-format="yyyy-mm-dd" type="text" id="order_time" name="order_time" value="{:date('Y-m-d')}"
+           readonly="readonly" class="input-date form-control" check="require" msg="下单时间不能为空">
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row <if condition='empty($checkPlanOrder)'>disabled</if>">
+   <div class="col-md-1">底衫选择</div>
+   <div class="col-md-1 form-data">
+    <select name="shirt_type">
+     <option value="">请选择</option>
+     {:fill_option($shirtTypeList)}
+    </select>
+   </div>
+
+   <div class="col-md-1">调货商及单号</div>
+   <div class="col-md-2 form-data">
+    <input type="text" name="shirt_note">
+   </div>
+
+   <div class="col-md-1">工艺选择</div>
+   <div class="col-md-1 form-data">
+    <select name="craft_type">
+     <option value="0">请选择</option>
+     {:fill_option($craftTypeList)}
+    </select>
+   </div>
+   <div class="col-md-1">底衫价格</div>
+   <div class="col-md-1 form-data">
+    <if condition="!empty($checkPlanOrder)">
+     <input type="text" name="shirt_price" class="shirt_price">
+    </if>
+   </div>
+   <div class="col-md-1">产品毛利</div>
+   <div class="col-md-1 form-data">
+    <if condition="!empty($checkPlanOrder)">
+     <input type="text" name="gross_profit" readonly> %
+    </if>
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row note">
+   <div class="col-md-1 title">产品备注及调货信息</div>
+   <div class="col-md-10 form-data">
+    <textarea name="product_note" required msg="请填写产品信息备注"></textarea>
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row note">
+   <div class="col-md-1 title">发货信息</div>
+   <div class="col-md-10 form-data">
+    <textarea name="note" required msg="请填写产品及发货信息备注"></textarea>
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+ </form>
+</div>

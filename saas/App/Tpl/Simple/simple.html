@@ -1,0 +1,143 @@
+<layout name='Layout/ace_popup'/>
+
+<div class="container company-oms">
+
+ <div class="panel-heading clearfix">
+  <div class="pull-right">
+   <a href="{:U('read',array('id'=>$order['id']))}" class="btn btn-sm btn-primary">编辑</a>
+  </div>
+ </div>
+
+ <div class="well">
+
+  <div class="row first-row">
+   <div class="col-md-1"><img style="height: 47px;" src="{:get_logo_url()}"></div>
+   <div class="col-md-1">接单人:</div>
+   <div class="col-md-1 form-data"><input type="text" id="sales" name="sales" value="{$userName}" readonly></div>
+   <div class="col-md-1">看样编号：</div>
+   <div class="col-md-2">{$order.produce_no}</div>
+
+   <div class="col-md-1">订单金额</div>
+   <div class="col-md-1 form-data">
+    <input type="text" name="total_price" class="total_price">
+   </div>
+
+   <div class="col-md-1">付款方式</div>
+   <div class="col-md-1 form-data">
+    <select name="pay_type">
+     {:fill_option($payTypeList)}
+    </select>
+   </div>
+   <div class="col-md-1 form-data payment_voucher">
+    <span class="fa fa-search display-none"></span>
+    <input type="hidden" name="payment_voucher" value="">
+
+    <div class="display-none" id="payment_voucher_container"></div>
+   </div>
+
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row">
+   <div class="col-md-1">店铺名称</div>
+   <div class="col-md-1 form-data">
+    <select name="shop_id" id="shop_id" check="require" msg="请选择店铺">
+     <option value="">请选择店铺</option>
+     {:fill_option($shopList)}
+    </select>
+   </div>
+   <div class="col-md-1">客户信息</div>
+   <div class="col-md-2 form-data">
+    <input type="text" name="cust_name" required msg="请填写客户信息" placeholder="（淘宝ID）">
+   </div>
+   <div class="col-md-3 form-data">
+    <input type="text" name="order_sn" placeholder="（订单编号）">
+   </div>
+   <div class="col-md-1">下单时间</div>
+   <div class="col-md-2">
+    <input data-date-format="yyyy-mm-dd" type="text" id="order_time" name="order_time" value="{:date('Y-m-d')}"
+           readonly="readonly" class="input-date form-control" check="require" msg="下单时间不能为空">
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row <if condition='empty($checkPlanOrder)'>disabled</if>">
+   <div class="col-md-1">底衫选择</div>
+   <div class="col-md-1 form-data">
+    <select name="shirt_type">
+     <option value="">请选择</option>
+     {:fill_option($shirtTypeList)}
+    </select>
+   </div>
+
+   <div class="col-md-1">调货商及单号</div>
+   <div class="col-md-2 form-data">
+    <input type="text" name="shirt_note">
+   </div>
+
+   <div class="col-md-1">工艺选择</div>
+   <div class="col-md-1 form-data">
+    <select name="craft_type">
+     <option value="0">请选择</option>
+     {:fill_option($craftTypeList)}
+    </select>
+   </div>
+   <div class="col-md-1">底衫价格</div>
+   <div class="col-md-1 form-data">
+    <if condition="!empty($checkPlanOrder)">
+     <input type="text" name="shirt_price" class="shirt_price">
+    </if>
+   </div>
+   <div class="col-md-1">产品毛利</div>
+   <div class="col-md-1 form-data">
+    <if condition="!empty($checkPlanOrder)">
+     <input type="text" name="gross_profit" readonly> %
+    </if>
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row note">
+   <div class="col-md-1 title">产品备注及调货信息</div>
+   <div class="col-md-10 form-data">
+    <textarea name="product_note" required msg="请填写产品信息备注"></textarea>
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row note">
+   <div class="col-md-1 title">发货信息</div>
+   <div class="col-md-10 form-data">
+    <textarea name="note" required msg="请填写产品及发货信息备注"></textarea>
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row">
+   <div class="col-md-11 text-center">流程详情</div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+  <div class="row flow-content">
+   <div class="col-md-11 text-left">
+    <empty name="flowList">
+     暂无动静
+     <else/>
+     <foreach name="flowList" item="vo">
+      <p>{$vo.create_time|date="Y-m-d H:i:s",###} {$vo.user_name} {$vo.note}</p>
+     </foreach>
+    </empty>
+
+   </div>
+   <div class="col-md-1 last-col"></div>
+  </div>
+
+ </div>
+
+ <div class="panel-heading clearfix">
+  <div class="pull-right" style="margin-top: 10px;">
+   <a href="{:U('read',array('id'=>$order['id']))}" class="btn btn-sm btn-primary">编辑</a>
+  </div>
+ </div>
+
+</div>

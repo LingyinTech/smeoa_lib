@@ -1,0 +1,33 @@
+<script type="text/javascript">
+	function save() {
+		if (check_form("form_data")){
+            if (check_form("form_data")) {
+                if ($('#ship_time').val() < 1) {
+                    ui_error($('#ship_time').attr("msg"));
+                    return false;
+                }
+                sendAjax("{:U('save')}", $("#form_data").serialize(), function(data) {
+                    if (data.status) {
+                        ui_alert(data.info, function() {
+                            parent.location.reload();
+                        });
+                    } else {
+                        ui_error(data.info);
+                    }
+                });
+            }
+		}
+	}
+
+    $(document).ready(function() {
+
+        var orderObj = {$order|json_encode=true};
+        $.each(orderObj, function (key, value) {
+            if ($('[name='+key+']') != undefined) {
+                $('[name='+key+']').val(value);
+            }
+        });
+
+    });
+
+</script>

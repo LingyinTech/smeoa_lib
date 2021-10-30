@@ -1,0 +1,40 @@
+<notempty name="script.order">
+    <include file="Public:order" />
+</notempty>
+
+<notempty name="script.simple">
+    <include file="Public:simple" />
+</notempty>
+
+<notempty name="script.invoice">
+    <include file="Public:invoice" />
+</notempty>
+
+<script type="text/javascript">
+    <if condition="!empty($uploadUrl)">
+        var upload_url = "{$uploadUrl}";
+    <else/>
+	    var upload_url = "{:U('upload')}";
+    </if>
+
+    <if condition="!empty($delUrl)">
+        var del_url = "{$delUrl}";
+    <else/>
+        var del_url = "{:U('del_file')}";
+    </if>
+
+	var _hmt = _hmt || [];
+	var app_path = "__ROOT__";
+    var imageCache = "{$imageCache}";
+</script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?dbbe8efc32bb380927f75d05ab2c9231";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+

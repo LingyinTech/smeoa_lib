@@ -1,0 +1,61 @@
+FROM centos:8
+
+MAINTAINER actors315 <actors315@gmail.com>
+
+RUN yum install -y epel-release
+
+RUN yum install -y wget gcc make bzip2 supervisor autoconf automake libtool \
+	openssl-devel pcre-devel libzip-devel libcurl-devel libxml2-devel sqlite-devel \
+	libpng-devel freetype-devel gd \
+	&& cd /usr/local/src \
+	&& wget http://nginx.org/download/nginx-1.19.5.tar.gz \
+	&& wget https://www.php.net/distributions/php-7.4.24.tar.bz2 --no-check-certificate \
+	&& wget https://github.com/kkos/oniguruma/archive/v6.9.4.tar.gz -O oniguruma-6.9.4.tar.gz \
+	&& wget https://pecl.php.net/get/redis-5.3.4.tgz --no-check-certificate \
+# 安装 nginx
+	&& cd /usr/local/src && tar -xvf nginx-1.19.5.tar.gz \
+	&& cd /usr/local/src/nginx-1.19.5 \
+	&& ./configure --prefix=/usr/local/nginx && make && make install \
+	&& echo 'export PATH=/usr/local/nginx/sbin:$PATH' >> /etc/bashrc \
+# 安装 oniguruma
+	&& cd /usr/local/src && tar -xvf oniguruma-6.9.4.tar.gz \
+	&& cd /usr/local/src/oniguruma-6.9.4 \
+	&& export LANGUAGE="en_US.UTF-8" && export LANG=en_US:zh_CN.UTF-8 && export LC_ALL=C \
+	&& ./autogen.sh && ./configure --prefix=/usr \
+	&& make -j2 && make install \
+# 安装 php
+	&& cd /usr/local/src && tar -xvf php-7.4.24.tar.bz2 \
+	&& cd /usr/local/src/php-7.4.24 \
+	&& ./configure --prefix=/usr/local/php --enable-fpm --with-fpm-user=www-data \
+	--with-fpm-group=www-data --enable-shared --with-mysqli --with-zip \
+	--with-openssl --with-curl --enable-mbstring --enable-gd \
+	&& make -j2 && make install \
+	&& cp /usr/local/src/php-7.4.24/php.ini-production /usr/local/php/lib/php.ini \
+	&& cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf \
+	&& cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf \
+	&& echo 'export PATH=/usr/local/php/bin:$PATH' >> /etc/bashrc \
+# 安装 redis 客户端
+    && cd /usr/local/src && tar -xvf redis-5.3.4.tgz \
+    && cd /usr/local/src/redis-5.3.4 \
+    && /usr/local/php/bin/phpize \
+    && ./configure --with-php-config=/usr/local/php/bin/php-config \
+    && make && make install \
+    && echo 'extension=redis' >> /usr/local/php/lib/php.ini \
+# 创建一些目录
+    && useradd www-data \
+    && mkdir -p /var/run/supervisor && chmod -R 666 /var/run/supervisor \
+    && mkdir -p /var/log/nginx/ && chown -R www-data:www-data /var/log/nginx \
+	&& touch /var/run/nginx.pid && chown -R www-data:www-data /var/run/nginx.pid \
+	&& mkdir -p /usr/local/nginx/conf.d/ \
+	&& mkdir -p /data/www \
+# 清理
+	&& cd /usr/local/src/ \
+	&& rm -rf /usr/local/src/* \
+	&& yum remove -y gcc make wget autoconf automake libtool openssl-devel pcre-devel \
+	libcurl-devel libxml2-devel sqlite-devel libpng-devel freetype-devel \
+	&& yum remove -y epel-release \
+	&& yum clean all
+
+EXPOSE 80
+
+CMD ["/usr/bin/supervisord","-c","/etc/supervisord.conf","--nodaemon"]

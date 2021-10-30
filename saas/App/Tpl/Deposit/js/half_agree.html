@@ -1,0 +1,16 @@
+<script type="text/javascript">	
+	function save(){
+		if (check_form("form_data")){
+			sendAjax("{:U('half_agree')}", $("#form_data").serialize(), function(data) {
+				if (data.status) {
+					ui_alert(data.info, function() {
+						parent.location.reload();
+					});
+				} else {
+					ui_error(data.info);
+				}
+			});
+		}
+		//myclose();
+	}
+</script>

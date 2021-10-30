@@ -1,0 +1,26 @@
+<layout name='Layout/ace_popup' />
+
+<div class="operate panel panel-default">
+	<div class="panel-body">
+		<div class="pull-left">
+			<a  onclick="save();" class="btn btn-sm btn-primary">确定</a>
+		</div>
+		<div class="pull-right">
+			<a  onclick="myclose();" class="btn btn-sm btn-primary">关闭</a>
+		</div>
+	</div>
+	<form method='post' id="form_data" name="form_data" enctype="multipart/form-data"  class="well form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="craft_type">选择工艺*：</label>
+			<div class="col-sm-8">
+				<select name="craft_type" id="craft_type" data-craft="{$craftType}">
+					<option value="0">请选择</option>
+					{:fill_option($craftTypeList,$craftType)}
+				</select>
+			</div>
+		</div>
+
+		<input name="order_id" id="order_id" value="{$orderId}" type="hidden" />
+		<input type="hidden" id="ajax" name="ajax" value="1">
+	</form>
+</div>

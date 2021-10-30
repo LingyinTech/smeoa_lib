@@ -1,0 +1,13 @@
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var orderObj = {$order|json_encode=true};
+        $.each(orderObj, function (key, value) {
+            if ($('[name='+key+']') != undefined) {
+                $('[name='+key+']').val(value);
+                $('[name='+key+']').attr('disabled',true);
+            }
+        });
+    });
+	
+</script>

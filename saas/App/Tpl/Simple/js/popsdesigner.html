@@ -1,0 +1,29 @@
+<script type="text/javascript">
+	function save() {
+		var id = $("#selected", parent.document).val(),
+			designerId = $(".btn-success").attr("id");
+
+		if (id.length > 0 && designerId && $(".offset-top-10").hasClass("btn-success")) {
+			var vs = "orderid="+id+"&designerid="+designerId;
+
+			sendAjax("__URL__/distribute_designer",vs,function(data){
+				if(data=="success"){
+                     $("#"+id, parent.document).css("display","none");
+                }else{
+                     ui_error("无法分派设计人员!");
+                }
+			});
+		} else {
+			ui_error("请选择设计人员!");
+			return false;
+		}
+		myclose();
+	}
+
+	$(document).ready(function() {
+		$(".offset-top-10").click(function(){
+			$(".btn-success").removeClass("btn-success").addClass("btn-info");
+			$(this).removeClass("btn-info").addClass("btn-success");
+		});
+	}); 
+</script>

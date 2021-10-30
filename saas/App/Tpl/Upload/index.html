@@ -1,0 +1,11 @@
+<layout name='Layout/ace_layout' />
+<!-- {:W('PageHeader',array('name'=>'所有订单','search'=>'S'))} -->
+<div>
+	<form method="post" action="{:U('Upload/upload')}"  enctype="multipart/form-data" name="form_data" id="form_data">
+		<input type="file"  name="photo">
+		<input type="submit" name="submit" value="提交"/>
+	</form>
+	<a href="{:U('Order/exportexcel')}">download</a>
+
+	<button class="btn btn-sm btn-primary" onclick="select_pid()" type="button">选择</button>
+</div>

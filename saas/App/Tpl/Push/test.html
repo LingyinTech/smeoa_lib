@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Web Notifications</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+var myNotifications = window.webkitNotifications;
+if(!window.webkitNotifications){
+	alert("您的浏览器不支持Notification桌面通知!");
+}
+if(myNotifications.checkPermission() === 1) {
+    myNotifications.requestPermission();
+} else if (myNotifications.checkPermission() === 0) {
+    var notification = myNotifications.createNotification('images/message.jpg', 'New Message Received', 'The html5 has send you an email.');
+    notification.ondisplay = function() { setTimeout('notification.cancel()', 5000); }
+    notification.show();
+} else {  
+    alert('Permission has been denied.');
+}
+</script>

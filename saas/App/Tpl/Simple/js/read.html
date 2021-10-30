@@ -1,0 +1,67 @@
+<script type="text/javascript">
+	function save() {
+		if (check_form("form_data")){
+            if (check_form("form_data")) {
+
+                const orderType = $("select[name=order_type]");
+
+                sendAjax("{:U('save')}", $("#form_data").serialize(), function(data) {
+                    if (data.status) {
+                        ui_alert(data.info, function() {
+                            parent.location.reload();
+                        });
+                    } else {
+                        ui_error(data.info);
+                    }
+                });
+            }
+		}
+	}
+
+    $(document).ready(function() {
+
+        $(".row.disabled input").attr("disabled", true);
+        $(".row.disabled select").attr("disabled", true);
+
+        var orderObj = {$order|json_encode=true};
+        $.each(orderObj, function (key, value) {
+            if ($('[name='+key+']') != undefined) {
+                $('[name='+key+']').val(value);
+            }
+
+            if ('payment_voucher' === key && !!value) {
+                $('.payment_voucher .fa-search').removeClass('display-none');
+            }
+        });
+
+        $(".shirt_price,.total_price,.diff_price,.rest_price").on('change',function (){
+            let shirtPrice = $("input[name=shirt_price]").val() || 0;
+            let totalPrice = $("input[name=total_price]").val() || 0;
+            let diffPrice = $("input[name=diff_price]").val() || 0;
+            let restPrice = $("input[name=rest_price]").val() || 0;
+            let total = parseFloat(totalPrice) - parseFloat(diffPrice) + parseFloat(restPrice);
+            let grossProfit = 0;
+            if (totalPrice > 0) {
+                grossProfit = (1 - shirtPrice / total) * 100;
+                grossProfit = grossProfit.toFixed(2);
+            }
+            $("input[name=gross_profit]").val(grossProfit);
+        })
+
+        $('.payment_voucher .fa-search').on('click', function () {
+            let sid = $('.payment_voucher input[name=payment_voucher]').val();
+            if (!sid) {
+                return;
+            }
+            var url = "{:U('doc/view_picture')}" + '?sid=' + sid;
+            layer.open({
+                type: 2,
+                content: url,
+                area: ['960px', '96%'],
+                maxmin: true,
+                title : '付款凭证',
+            });
+        });
+    });
+
+</script>

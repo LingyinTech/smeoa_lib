@@ -1,0 +1,148 @@
+<layout name='Layout/ace_layout' />
+{:W('PageHeader',array('name'=>'添加订单','search'=>'N'))}
+<div class="operate panel panel-default">
+	<div class="panel-body">
+		<div class="pull-right" >
+			<a onclick="add()" class="btn btn-sm btn-primary">新增</a>
+		</div>
+	</div>
+</div>
+<div class="col-xs-12">
+<form id="form_data" name="form_data" method="post" class="well form-horizontal clearfix">
+<input type="hidden" name="op_mode" id="op_mode" value="add">
+<table id="addOrder">
+
+ <tr class="h65">
+ 	<td class="bdNone"><img style="width: 139px;height: 47px;text-align: left;" src="{:get_logo_url()}"></td>
+ 	<td colspan="16" class="bdNone">
+      <span style='font-weight:bold; font-size:26px;'>帝峰衫国客户更进</span>
+      <span style="margin-left: 20px;">生产编号：</span>
+	</td>
+ </tr>
+
+ <tr>
+
+  <td class="title firstCol">
+   店铺名称
+  </td>
+  <td colspan=4>
+   <select name="shop_id" id="shop_id" check="require" msg="请选择店铺">
+    <option value="">请选择店铺</option>
+    {:fill_option($shopList)}
+   </select>
+  </td>
+
+  <td colspan="2" class="title">客户名称</td>
+  <td colspan=5>
+   <input type="text" id="cust_name" name="cust_name" check="require" msg="请输入客户名称">
+  </td>
+
+  <td class="title">下单时间</td>
+
+  <td colspan=2>
+   <input data-date-format="yyyy-mm-dd" type="text" id="order_time" name="order_time" readonly="readonly" class="input-date form-control" check="require" msg="下单时间不能为空" >
+  </td>
+
+ </tr>
+
+ <tr>
+
+  <td class="title firstCol">
+   接单人
+  </td>
+  <td colspan="4">
+   <input type="text" id="sales" name="sales" value="{$userName}" readonly>
+  </td>
+
+  <td colspan="2" class="title">客户信息</td>
+  <td colspan="5" class="price">
+   <input class="form-control" type="text" name="num" id="num" check="require" msg="预定件数" placeholder="预定件数" >
+
+   <select name="is_picture" id="is_picture">
+    <option value="">效果图</option>
+    <option value="1">有</option>
+    <option value="2">无</option>
+   </select>
+
+  </td>
+
+  <td class="title">订单状态</td>
+  <td colspan="3" class="price">
+   <select name="order_status" id="order_status" class="form-control">
+    {:fill_option($statusList)}
+   </select>
+  </td>
+
+ </tr>
+
+ <tr>
+  <td rowspan="7" class="title">选定款式</td>
+  <td rowspan="7" colspan=4>
+   <select name="style" id="style" class="form-control">
+    <option value="">选择款式</option>
+    {:fill_option($style_list)}
+   </select>
+  </td>
+
+  <td colspan=2 class="title">第一次跟进</td>
+  <td colspan="8">
+   <input type="text" name="note1" id="note1">
+  </td>
+
+ </tr>
+
+ <tr>
+  <td colspan=2 class="title">第二次跟进</td>
+  <td colspan="8">
+   <input type="text" name="note2" id="note2">
+  </td>
+ </tr>
+
+ <tr>
+  <td colspan=2 class="title">第三次跟进</td>
+  <td colspan="8">
+   <input type="text" name="note3" id="note3">
+  </td>
+ </tr>
+
+ <tr>
+  <td colspan=2 class="title">第四次跟进</td>
+  <td colspan="8">
+   <input type="text" name="note4" id="note4">
+  </td>
+ </tr>
+
+ <tr>
+  <td colspan=2 class="title">第五次跟进</td>
+  <td colspan="8">
+   <input type="text" name="note5" id="note5">
+  </td>
+ </tr>
+
+ <tr>
+  <td colspan=2 class="title">第六次跟进</td>
+  <td colspan="8">
+   <input type="text" name="note6" id="note6">
+  </td>
+ </tr>
+
+ <tr>
+  <td colspan=2 class="title">第七次跟进</td>
+  <td colspan="8">
+   <input type="text" name="note7" id="note7">
+  </td>
+ </tr>
+
+
+ <tr>
+  <td class="title">
+   备注
+  </td>
+  <td colspan=16>
+   <textarea name="print_desc" id="print_desc" placeholder="备注"  style="width:100%;height: 85px;"></textarea>
+  </td>
+ </tr>
+
+</table>
+</form>
+</div>

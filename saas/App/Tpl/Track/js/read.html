@@ -1,0 +1,26 @@
+<script type="text/javascript">
+    function save() {
+        if (check_form("form_data")) {
+            $("#op_mode").val("edit");
+            sendAjax("{:U('save')}", $("#form_data").serialize(), function(data) {
+                if (data.status) {
+                    ui_alert(data.info, function() {
+                        parent.location.reload();
+                    });
+                } else {
+                    ui_error(data.info);
+                }
+            });
+        }
+    }
+
+
+	$(document).ready(function() {
+        var orderObj = {$track|json_encode=true};
+        $.each(orderObj, function (key, value) {
+            if ($('#' + key) != undefined) {
+                $('#' + key).val(value);
+            }
+        });
+	}); 
+</script>

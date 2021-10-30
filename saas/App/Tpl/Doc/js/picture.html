@@ -1,0 +1,99 @@
+<script type="text/javascript">
+
+    function addFile(type, id) {
+        var url = "{:U('doc/add_file')}" + '?type=' + type + '&album_id=' + id;
+        winopen(url, 780, 550);
+    }
+
+    $(document).ready(function () {
+
+        $('.js-album-cover img').on('click', function () {
+            var sid = $(this).attr('data-sid');
+            layer.photos({
+                photos: '.ul_table',
+                anim: 5,
+            });
+        })
+
+        $('.batchMgr').on('click', function () {
+            $(this).hide();
+            $('.all').show();
+            $('.batchDown').show();
+            $('.batchDelete').show();
+            $('.return').show();
+            $('.mod-photo-op').show();
+        });
+
+        $('.all').on('click', function () {
+            var checked = parseInt($(this).attr('data-checked'));
+            checked = !checked;
+            console.log(checked);
+            $('.mod-photo-op').each(function () {
+                $(this).prop('checked', checked);
+            });
+            checked = checked ? 1 : 0;
+            $(this).attr('data-checked', checked);
+        });
+
+        $('.return').on('click', function () {
+            $('.batchMgr').show();
+            $('.all').hide();
+            $('.batchDown').hide();
+            $('.batchDelete').hide();
+            $('.return').hide();
+            $('.mod-photo-op').hide();
+        });
+
+        $('.batchDown').on('click', function () {
+            var deleteArr = [];
+            $('.mod-photo-op').each(function () {
+                if ($(this).prop('checked')) {
+                    deleteArr.push($(this).val());
+                }
+            });
+
+            if (deleteArr == false) {
+                layer.msg('请选择要下载的图片');
+                return false;
+            }
+            var idList = deleteArr.join(',');
+            if (confirm('确认下载？')) {
+                var href = $(this).attr('href');
+                var index = href.indexOf('?');
+                if (index > 0) {
+                    href = href.substr(0, index);
+                }
+                $(this).attr('href', href + '?idList=' + idList);
+            } else {
+                return false;
+            }
+        });
+
+        $('.batchDelete').on('click', function () {
+            var deleteArr = [];
+            $('.mod-photo-op').each(function () {
+                if ($(this).prop('checked')) {
+                    deleteArr.push($(this).val());
+                }
+            });
+
+            if (deleteArr == false) {
+                layer.msg('请选择要删除的图片');
+                return false;
+            }
+            var idList = deleteArr.join(',');
+            if (confirm('删除后无法还原,确认删除？')) {
+                sendAjax("{:U('delete_picture')}", 'idList=' + idList, function (data) {
+                    if (data.status) {
+                        ui_alert(data.info, function () {
+                            location.reload();
+                        });
+                    } else {
+                        ui_error(data.info);
+                    }
+                });
+            }
+        });
+    });
+
+</script>

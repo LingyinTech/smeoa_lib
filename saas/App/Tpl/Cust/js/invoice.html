@@ -1,0 +1,32 @@
+<script type="text/javascript">
+    function save() {
+
+        sendAjax("{:U('invoice')}", $("#form_data").serialize(), function (data) {
+            if (data.status) {
+                ui_alert(data.info, function () {
+                    parent.location.reload();
+                });
+            } else {
+                ui_error(data.info);
+            }
+        });
+    }
+    $(document).ready(function () {
+
+        $("#dept_id").on('change', function () {
+            var deptId = $(this).val();
+            sendAjax("{:U('get_emp_by_dept')}", 'dept_id=' + deptId, function (data) {
+                if (data.status) {
+                    var _html = '<option value="">请选择</option>';
+                    $.each(data.data,function (i,v) {
+                        console.log(v);
+                        _html += '<option value="'+v.id+'">'+v.name+'</option>';
+                    });
+                    $('#receiver_id').html(_html);
+                } else {
+                    $('#receiver_id').html('<option value="">请选择</option>');
+                }
+            });
+        });
+    });
+</script>

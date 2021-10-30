@@ -1,0 +1,26 @@
+<script type="text/javascript">	
+	function half(id){
+		ui_alert('确认已收半款？', function() {
+			sendAjax("{:U('half_agree')}", 'orderid='+id, function(data) {
+				if (data.status) {
+					ui_alert(data.info, function() {
+						//parent.location.reload();
+						$('#tbody_'+id).remove();
+					});
+				} else {
+					ui_error(data.info);
+				}
+			});
+		});
+	}
+	/*
+	function half(id){
+		url = "{:U('half_agree')}" + '?orderid=' + id;
+		winopen(url, 700, 500);
+	}
+	*/
+	function export_all(){
+		url = "{:U('export_all')}";
+		winopen(url, 700, 500);
+	}
+</script>

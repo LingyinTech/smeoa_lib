@@ -1,5 +1,6 @@
 {
     "require": {
-        "qcloud/cos-sdk-v5": "^2.3"
+        "qcloud/cos-sdk-v5": "^2.3",
+        "topthink/think-helper": "^3.1"
     }
 }

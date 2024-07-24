@@ -37,7 +37,6 @@ class Think {
         //[/RUNTIME]
         // 运行应用
         App::run();
-        return ;
     }
 
     //[RUNTIME]
@@ -143,7 +142,6 @@ class Think {
             // 部署模式下面生成编译文件
             build_runtime_cache($compile);
         }
-        return ;
     }
     //[/RUNTIME]
 

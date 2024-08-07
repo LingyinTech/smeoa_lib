@@ -4,9 +4,16 @@ namespace Topsdk\Topapi\Ability648;
 use Topsdk\Topapi\TopApiClient;
 use Topsdk\Topapi\Ability648\Request\TaobaoItemSkuAddRequest;
 use Topsdk\Topapi\Ability648\Request\TaobaoItemSkuUpdateRequest;
+use Topsdk\Topapi\Ability648\Request\TaobaoTradesSoldGetRequest;
 use Topsdk\Topapi\Ability648\Request\TaobaoTradeGetRequest;
+use Topsdk\Topapi\Ability648\Request\TaobaoTradeFullinfoGetRequest;
 use Topsdk\Topapi\Ability648\Request\TaobaoAreasGetRequest;
+use Topsdk\Topapi\Ability648\Request\TaobaoTradeConfirmfeeGetRequest;
+use Topsdk\Topapi\Ability648\Request\TaobaoLogisticsTraceSearchRequest;
 use Topsdk\Topapi\Ability648\Request\TaobaoLogisticsCompaniesGetRequest;
+use Topsdk\Topapi\Ability648\Request\TaobaoLogisticsOrdersDetailGetRequest;
+use Topsdk\Topapi\Ability648\Request\TaobaoLogisticsOrdersGetRequest;
+use Topsdk\Topapi\Ability648\Request\TaobaoTradeAmountGetRequest;
 use Topsdk\Topapi\Ability648\Request\TaobaoLogisticsPartnersGetRequest;
 use Topsdk\Topapi\Ability648\Request\TaobaoLogisticsAddressSearchRequest;
 use Topsdk\Topapi\Ability648\Request\TaobaoLogisticsAddressRemoveRequest;
@@ -44,10 +51,22 @@ class Ability648 {
         return $this->client->executeWithSession("taobao.item.sku.update", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
+        查询卖家已卖出的交易数据（根据创建时间）
+    **/
+    public function taobaoTradesSoldGet(TaobaoTradesSoldGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.trades.sold.get", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
         获取单笔交易的部分信息(性能高)
     **/
     public function taobaoTradeGet(TaobaoTradeGetRequest $request,string $session) {
         return $this->client->executeWithSession("taobao.trade.get", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        获取单笔交易的详细信息
+    **/
+    public function taobaoTradeFullinfoGet(TaobaoTradeFullinfoGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.trade.fullinfo.get", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
         查询地址区域
@@ -56,10 +75,40 @@ class Ability648 {
         return $this->client->execute("taobao.areas.get", $request->toMap(), $request->toFileParamMap());
     }
     /**
+        获取交易确认收货费用
+    **/
+    public function taobaoTradeConfirmfeeGet(TaobaoTradeConfirmfeeGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.trade.confirmfee.get", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        物流流转信息查询
+    **/
+    public function taobaoLogisticsTraceSearch(TaobaoLogisticsTraceSearchRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.logistics.trace.search", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
         查询物流公司信息
     **/
     public function taobaoLogisticsCompaniesGet(TaobaoLogisticsCompaniesGetRequest $request) {
         return $this->client->execute("taobao.logistics.companies.get", $request->toMap(), $request->toFileParamMap());
+    }
+    /**
+        批量查询物流订单,返回详细信息
+    **/
+    public function taobaoLogisticsOrdersDetailGet(TaobaoLogisticsOrdersDetailGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.logistics.orders.detail.get", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        批量查询物流订单
+    **/
+    public function taobaoLogisticsOrdersGet(TaobaoLogisticsOrdersGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.logistics.orders.get", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        交易帐务查询
+    **/
+    public function taobaoTradeAmountGet(TaobaoTradeAmountGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.trade.amount.get", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
         查询支持起始地到目的地范围的物流公司

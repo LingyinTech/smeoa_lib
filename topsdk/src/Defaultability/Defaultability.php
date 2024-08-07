@@ -25,6 +25,7 @@ use Topsdk\Topapi\Defaultability\Request\TaobaoSellercatsListGetRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoSellercatsListAddRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoSellercatsListUpdateRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoShopUpdateRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoLogisticsTraceGetRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoItemcatsGetRequest;
 use Topsdk\Topapi\Defaultability\Request\CainiaoCloudprintStdtemplatesGetRequest;
 use Topsdk\Topapi\Defaultability\Request\CainiaoCloudprintMystdtemplatesGetRequest;
@@ -69,6 +70,8 @@ use Topsdk\Topapi\Defaultability\Request\TaobaoVasOrderSearchRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoVasSubscSearchRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoItemQuantityUpdateRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoItemBarcodeUpdateRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoWlbOrderJzQueryRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoWlbOrderJzConsignRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoFulfillmentOrderAssembleRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoItemTemplatesGetRequest;
 use Topsdk\Topapi\Defaultability\Request\AlibabaItemPublishMarketGetRequest;
@@ -115,9 +118,18 @@ use Topsdk\Topapi\Defaultability\Request\TaobaoSubusersPageRequest;
 use Topsdk\Topapi\Defaultability\Request\CainiaoCloudprintIsvResourcesGetRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoFenxiaoOrderRemarkUpdateRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoUserSellerGetRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameCreateRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameQueryRequest;
 use Topsdk\Topapi\Defaultability\Request\CainiaoCloudprintTemplatesMigrateRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameDeleteRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameModifyRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsTemplateCreateRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsTemplateQueryRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsTemplateDeleteRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsTemplateModifyRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoSubusersInfoQueryRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoItemAnchorGetRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoTradesSoldIncrementvGetRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoPicturePicturesGetRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoPicturePicturesCountRequest;
 
@@ -267,6 +279,12 @@ class Defaultability {
     **/
     public function taobaoShopUpdate(TaobaoShopUpdateRequest $request,string $session) {
         return $this->client->executeWithSession("taobao.shop.update", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        用户根据交易号查询物流流转信息
+    **/
+    public function taobaoLogisticsTraceGet(TaobaoLogisticsTraceGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.logistics.trace.get", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
         获取后台供卖家发布商品的标准商品类目
@@ -531,6 +549,18 @@ class Defaultability {
     **/
     public function taobaoItemBarcodeUpdate(TaobaoItemBarcodeUpdateRequest $request,string $session) {
         return $this->client->executeWithSession("taobao.item.barcode.update", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        家装业务查询物流公司api
+    **/
+    public function taobaoWlbOrderJzQuery(TaobaoWlbOrderJzQueryRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.wlb.order.jz.query", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        家装发货接口
+    **/
+    public function taobaoWlbOrderJzConsign(TaobaoWlbOrderJzConsignRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.wlb.order.jz.consign", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
         拆合单结果回传接口
@@ -809,10 +839,58 @@ class Defaultability {
         return $this->client->executeWithSession("taobao.user.seller.get", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
+        淘宝短信签名创建接口
+    **/
+    public function taobaoJstSmsSignnameCreate(TaobaoJstSmsSignnameCreateRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.jst.sms.signname.create", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        淘宝短信签名查询
+    **/
+    public function taobaoJstSmsSignnameQuery(TaobaoJstSmsSignnameQueryRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.jst.sms.signname.query", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
         云打印模板迁移接口
     **/
     public function cainiaoCloudprintTemplatesMigrate(CainiaoCloudprintTemplatesMigrateRequest $request,string $session) {
         return $this->client->executeWithSession("cainiao.cloudprint.templates.migrate", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        淘宝短信签名删除
+    **/
+    public function taobaoJstSmsSignnameDelete(TaobaoJstSmsSignnameDeleteRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.jst.sms.signname.delete", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        淘宝短信签名修改
+    **/
+    public function taobaoJstSmsSignnameModify(TaobaoJstSmsSignnameModifyRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.jst.sms.signname.modify", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        淘宝短信模板创建
+    **/
+    public function taobaoJstSmsTemplateCreate(TaobaoJstSmsTemplateCreateRequest $request) {
+        return $this->client->execute("taobao.jst.sms.template.create", $request->toMap(), $request->toFileParamMap());
+    }
+    /**
+        淘宝短信模板查询
+    **/
+    public function taobaoJstSmsTemplateQuery(TaobaoJstSmsTemplateQueryRequest $request) {
+        return $this->client->execute("taobao.jst.sms.template.query", $request->toMap(), $request->toFileParamMap());
+    }
+    /**
+        淘宝短信模板删除
+    **/
+    public function taobaoJstSmsTemplateDelete(TaobaoJstSmsTemplateDeleteRequest $request) {
+        return $this->client->execute("taobao.jst.sms.template.delete", $request->toMap(), $request->toFileParamMap());
+    }
+    /**
+        淘宝短信模板修改
+    **/
+    public function taobaoJstSmsTemplateModify(TaobaoJstSmsTemplateModifyRequest $request) {
+        return $this->client->execute("taobao.jst.sms.template.modify", $request->toMap(), $request->toFileParamMap());
     }
     /**
         根据当前子账号登陆态，获取该子账号基本信息
@@ -825,6 +903,12 @@ class Defaultability {
     **/
     public function taobaoItemAnchorGet(TaobaoItemAnchorGetRequest $request,string $session) {
         return $this->client->executeWithSession("taobao.item.anchor.get", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        查询卖家已卖出的增量交易数据（根据入库时间）
+    **/
+    public function taobaoTradesSoldIncrementvGet(TaobaoTradesSoldIncrementvGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.trades.sold.incrementv.get", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
         图片获取

@@ -143,6 +143,11 @@ class TmallExchangeReceiveGetExchange {
      **/
     public $attributes;
 
+    /**
+        修改后购买的商品sku
+     **/
+    public $new_bought_sku;
+
 
     public function getAlipayNo() : string{
         return $this->alipay_no;
@@ -366,6 +371,14 @@ class TmallExchangeReceiveGetExchange {
 
     public function setAttributes(string $attributes){
         $this->attributes = $attributes;
+    }
+
+    public function getNewBoughtSku() : string{
+        return $this->new_bought_sku;
+    }
+
+    public function setNewBoughtSku(string $newBoughtSku){
+        $this->new_bought_sku = $newBoughtSku;
     }
 
 

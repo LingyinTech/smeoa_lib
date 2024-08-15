@@ -1423,6 +1423,11 @@ class TaobaoTradeFullinfoGetTrade {
      **/
     public $is_gfjy;
 
+    /**
+        卖家订单备注操作人信息
+     **/
+    public $memo_operator_infos;
+
 
     public function getBuyerOpenUid() : string{
         return $this->buyer_open_uid;
@@ -3694,6 +3699,14 @@ class TaobaoTradeFullinfoGetTrade {
 
     public function setIsGfjy(bool $isGfjy){
         $this->is_gfjy = $isGfjy;
+    }
+
+    public function getMemoOperatorInfos() : array{
+        return $this->memo_operator_infos;
+    }
+
+    public function setMemoOperatorInfos(array $memoOperatorInfos){
+        $this->memo_operator_infos = $memoOperatorInfos;
     }
 
 

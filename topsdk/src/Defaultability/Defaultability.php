@@ -119,7 +119,9 @@ use Topsdk\Topapi\Defaultability\Request\CainiaoCloudprintIsvResourcesGetRequest
 use Topsdk\Topapi\Defaultability\Request\TaobaoFenxiaoOrderRemarkUpdateRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoUserSellerGetRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameCreateRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoTradeSellermemosGetRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameQueryRequest;
+use Topsdk\Topapi\Defaultability\Request\TaobaoTradeSellerflagsGetRequest;
 use Topsdk\Topapi\Defaultability\Request\CainiaoCloudprintTemplatesMigrateRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameDeleteRequest;
 use Topsdk\Topapi\Defaultability\Request\TaobaoJstSmsSignnameModifyRequest;
@@ -845,10 +847,22 @@ class Defaultability {
         return $this->client->executeWithSession("taobao.jst.sms.signname.create", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
+        查询订单备注列表
+    **/
+    public function taobaoTradeSellermemosGet(TaobaoTradeSellermemosGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.trade.sellermemos.get", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
         淘宝短信签名查询
     **/
     public function taobaoJstSmsSignnameQuery(TaobaoJstSmsSignnameQueryRequest $request,string $session) {
         return $this->client->executeWithSession("taobao.jst.sms.signname.query", $request->toMap(), $request->toFileParamMap(), $session);
+    }
+    /**
+        查询商家插旗
+    **/
+    public function taobaoTradeSellerflagsGet(TaobaoTradeSellerflagsGetRequest $request,string $session) {
+        return $this->client->executeWithSession("taobao.trade.sellerflags.get", $request->toMap(), $request->toFileParamMap(), $session);
     }
     /**
         云打印模板迁移接口

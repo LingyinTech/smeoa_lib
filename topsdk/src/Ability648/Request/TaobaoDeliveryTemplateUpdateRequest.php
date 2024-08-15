@@ -15,7 +15,7 @@ class TaobaoDeliveryTemplateUpdateRequest {
     private $templateId;
 
     /**
-        可选值：0,1 <br>  说明<br>0:表示买家承担服务费;<br>1:表示卖家承担服务费
+        必填，可选值：0,1 <br>  说明<br>0:表示买家承担服务费;<br>1:表示卖家承担服务费
      **/
     private $assumer;
 

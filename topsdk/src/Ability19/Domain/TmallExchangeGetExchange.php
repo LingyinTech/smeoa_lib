@@ -168,6 +168,11 @@ class TmallExchangeGetExchange {
      **/
     public $buyer_open_uid;
 
+    /**
+        所购买的修改后商品sku
+     **/
+    public $new_bought_sku;
+
 
     public function getBuyerLogisticNo() : string{
         return $this->buyer_logistic_no;
@@ -431,6 +436,14 @@ class TmallExchangeGetExchange {
 
     public function setBuyerOpenUid(string $buyerOpenUid){
         $this->buyer_open_uid = $buyerOpenUid;
+    }
+
+    public function getNewBoughtSku() : string{
+        return $this->new_bought_sku;
+    }
+
+    public function setNewBoughtSku(string $newBoughtSku){
+        $this->new_bought_sku = $newBoughtSku;
     }
 
 

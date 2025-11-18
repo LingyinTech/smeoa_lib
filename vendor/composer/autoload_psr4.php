@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'think\\' => array($vendorDir . '/topthink/think-helper/src'),
+    'ip2region\\' => array($vendorDir . '/zoujingli/ip2region/src/ip2region'),
     'Topsdk\\Topapi\\' => array($baseDir . '/topsdk/src'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Qcloud\\Cos\\' => array($vendorDir . '/qcloud/cos-sdk-v5/src/Qcloud/Cos'),

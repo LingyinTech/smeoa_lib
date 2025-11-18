@@ -12,4 +12,5 @@ return array(
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
     'f67964341ef83e59f1cc6a3916599312' => $vendorDir . '/qcloud/cos-sdk-v5/src/Qcloud/Cos/Common.php',
     '9b552a3cc426e3287cc811caefa3cf53' => $vendorDir . '/topthink/think-helper/src/helper.php',
+    '190ec939e5c9a714534abbb4232740cb' => $vendorDir . '/zoujingli/ip2region/function.php',
 );

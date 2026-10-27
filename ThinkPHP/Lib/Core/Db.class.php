@@ -504,7 +504,9 @@ class Db {
                 }
             }else {
                 $count = count($val);
-                $rule  = isset($val[$count-1])?strtoupper($val[$count-1]):'';
+                // 最后一个元素可能是数组（如 array('in', array(1,2))），PHP 8 下 strtoupper() 传数组会抛 TypeError，
+                // 这里先判类型，非字符串时按旧行为当作未指定逻辑符处理
+                $rule  = (isset($val[$count-1]) && is_string($val[$count-1]))?strtoupper($val[$count-1]):'';
                 if(in_array($rule,array('AND','OR','XOR'))) {
                     $count  = $count -1;
                 }else{

@@ -28,6 +28,12 @@ class DbMysqli extends Db{
         if ( !extension_loaded('mysqli') ) {
             throw_exception(L('_NOT_SUPPERT_').':mysqli');
         }
+        // PHP 8.1 起 mysqli 默认报告模式改为 MYSQLI_REPORT_ERROR|MYSQLI_REPORT_STRICT，
+        // 查询出错会直接抛 mysqli_sql_exception，这里的 query()/execute() 依赖
+        // “返回 false 再走 $this->error()” 的旧语义。显式关掉，保持与 PHP 7.4 一致。
+        if (function_exists('mysqli_report')) {
+            mysqli_report(MYSQLI_REPORT_OFF);
+        }
         if(!empty($config)) {
             $this->config   =   $config;
             if(empty($this->config['params'])) {

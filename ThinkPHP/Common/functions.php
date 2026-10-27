@@ -158,7 +158,9 @@ function U($url = '', $vars = '', $suffix = true, $redirect = false, $domain = f
     // 解析URL
     $info = parse_url($url);
     $url = !empty($info['path']) ? $info['path'] : ACTION_NAME;
-    if (isset($info['fragment'])) { // 解析锚点
+    // PHP 8 的 parse_url 对 'a/#' 这种结尾就是锚点的地址会额外返回 fragment=''（PHP 7.4 不返回该键），
+    // 只判断 isset 会导致 URL 末尾多拼一个 '#'，这里把空锚点排除掉，保持与 PHP 7 一致
+    if (isset($info['fragment']) && '' !== $info['fragment']) { // 解析锚点
         $anchor = $info['fragment'];
         if (false !== strpos($anchor, '?')) { // 解析参数
             list($anchor, $info['query']) = explode('?', $anchor, 2);

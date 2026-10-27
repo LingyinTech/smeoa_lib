@@ -265,7 +265,8 @@ abstract class Action
                     $input =& $_SERVER;
                     break;
                 case '_globals' :
-                    $input =& $GLOBALS;
+                    // PHP 8.1+ 禁止对 $GLOBALS 取引用，此处只读，改为值拷贝
+                    $input =  $GLOBALS;
                     break;
                 default:
                     throw_exception(__CLASS__ . ':' . $method . L('_METHOD_NOT_EXIST_'));

@@ -75,8 +75,8 @@ class Searcher
      */
     public static function newWithFileOnly($version, $dbFile)
     {
-        $versionObj = $version === 4 ? IPv4::default() : IPv6::default();
-        return new self($versionObj, $dbFile, null, null);
+        $self = $version === 4 ? IPv4::default() : IPv6::default();
+        return new self($self, $dbFile, null, null);
     }
 
     /**
@@ -172,7 +172,7 @@ class Searcher
      *
      * 在XDB数据库中搜索指定IP地址对应的地区信息
      * 使用优化的二分查找算法进行快速定位
-     * 
+     *
      * @Note 重要提示：IP地址必须是人类可读的IP地址字符串
      * 不要使用 parseIP 返回的打包二进制字符串
      *
@@ -243,11 +243,11 @@ class Searcher
         }
 
         // printf("sPtr: %d, ePtr: %d\n", $sPtr, $ePtr);
-        [$bytes, $dBytes] = [strlen($ipBytes), strlen($ipBytes) << 1];
+        list($bytes, $dBytes) = [strlen($ipBytes), strlen($ipBytes) << 1];
 
         // binary search the segment index to get the region info
         $idxSize = $this->version->segmentIndexSize;
-        [$dataLen, $dataPtr, $l, $h] = [0, 0, 0, ($ePtr - $sPtr) / $idxSize];
+        list($dataLen, $dataPtr, $l, $h) = [0, 0, 0, ($ePtr - $sPtr) / $idxSize];
         while ($l <= $h) {
             $m = ($l + $h) >> 1;
             $p = $sPtr + $m * $idxSize;

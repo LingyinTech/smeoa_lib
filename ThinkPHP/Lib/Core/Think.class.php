@@ -283,7 +283,9 @@ class Think {
             if(C('LOG_RECORD')) Log::write("[$errno] ".$errorStr,Log::ERR);
             function_exists('halt')?halt($errorStr):exit('ERROR:'.$errorStr);
             break;
-          case E_STRICT:
+          // E_STRICT 自 PHP 8.4 起已被移除，直接写常量名会触发 deprecation，
+          // 这里用其固定值 2048（PHP 7.4 与 8.5 下都成立）
+          case 2048: // E_STRICT
           case E_USER_WARNING:
           case E_USER_NOTICE:
           default:

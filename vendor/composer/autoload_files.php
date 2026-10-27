@@ -10,7 +10,9 @@ return array(
     'c964ee0ededf28c96ebd9db5099ef910' => $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
     '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
     'a4a119a56e50fbb293281d9a48007e0e' => $vendorDir . '/symfony/polyfill-php80/bootstrap.php',
+    '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => $vendorDir . '/symfony/polyfill-mbstring/bootstrap.php',
+    '2cffec82183ee1cea088009cef9a6fc3' => $vendorDir . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
     'f67964341ef83e59f1cc6a3916599312' => $vendorDir . '/qcloud/cos-sdk-v5/src/Qcloud/Cos/Common.php',
     '9b552a3cc426e3287cc811caefa3cf53' => $vendorDir . '/topthink/think-helper/src/helper.php',
-    '190ec939e5c9a714534abbb4232740cb' => $vendorDir . '/zoujingli/ip2region/function.php',
+    '6eeddab0a9058b873731e6e3b48dca71' => $vendorDir . '/zoujingli/ip2region/src/common.php',
 );

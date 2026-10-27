@@ -499,7 +499,10 @@ class Model {
             return false;
         }
         if(empty($resultSet)) { // 查询结果为空
-            return null;
+            // PHP 8 下把 null 传给 array_column()/foreach/count() 等会直接抛 TypeError，
+            // 这里返回空数组（与 ThinkPHP 3.2+ 的行为一致）。
+            // 调用方用 empty()/!$result 判断语义不变。
+            return array();
         }
         $this->_after_select($resultSet,$options);
         return $resultSet;

@@ -58,7 +58,9 @@ function I($name,$default='',$filter=null) {
         case 'session' :   $input =& $_SESSION;   break;
         case 'cookie'  :   $input =& $_COOKIE;    break;
         case 'server'  :   $input =& $_SERVER;    break;
-        case 'globals' :   $input =& $GLOBALS;    break;
+        // PHP 8.1+ 禁止对 $GLOBALS 取引用（"Cannot acquire reference to $GLOBALS"），
+        // 此处只是读取，改成值拷贝即可，行为与旧版一致。
+        case 'globals' :   $input =  $GLOBALS;    break;
         default:
             return NULL;
     }

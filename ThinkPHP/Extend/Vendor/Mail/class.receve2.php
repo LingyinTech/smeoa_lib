@@ -436,7 +436,7 @@ function auto_charset($fContents,$from,$to){
                  return $text;
              }
              if($structure->type == 1) {
-                 while(list($index, $sub_structure) = each($structure->parts)) {
+                 foreach ($structure->parts as $index => $sub_structure) {
                      if($part_no) {
                          $prefix = $part_no . '.';
                      }
